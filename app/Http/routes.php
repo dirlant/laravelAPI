@@ -12,7 +12,12 @@
 */
 Route::get('/', 'VehiculoController@showAll');
 Route::resource('fabricante', 'FabricanteController');
-Route::resource('fabricante.vehiculo', 'VehiculoController');
+Route::resource('vehiculo', 'VehiculoController', [
+  'only' => ['index', 'show']
+]);
+Route::resource('fabricante.vehiculo', 'FabricanteVehiculoController', [
+  'except' => ['show']
+]);
 /*
 Route::get('/', 'MiControlador@index');
 

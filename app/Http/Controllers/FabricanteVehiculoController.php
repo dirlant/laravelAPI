@@ -5,16 +5,16 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class VehiculoController extends Controller {
+class FabricanteVehiculoController extends Controller {
 
 		/**
 		 * Display a listing of the resource.
 		 *
 		 * @return Response
 		 */
-		public function index()
+		public function index($id)
 		{
-			return 'mostrando la lista de los vehiculo por API';
+			return "mostrando vehiculos del fabricante ->$id";
 		}
 
 		/**
@@ -22,9 +22,9 @@ class VehiculoController extends Controller {
 		 *
 		 * @return Response
 		 */
-		public function create()
+		public function create($id)
 		{
-			return 'Mostrando el menu para crear un vehiculo';
+			return "creando vehiculos del fabricante ->$id";
 		}
 
 		/**
@@ -34,7 +34,7 @@ class VehiculoController extends Controller {
 		 */
 		public function store()
 		{
-
+			//
 		}
 
 		/**
@@ -43,9 +43,9 @@ class VehiculoController extends Controller {
 		 * @param  int  $id
 		 * @return Response
 		 */
-		public function show($id)
+		public function show($idFabricante, $idVehiculo)
 		{
-			return "mostrando fabricante->$id";
+			return "mostrando vehiculos del fabricante ->$idFabricante  con del detalle del vehiculo $idVehiculo";
 		}
 
 		/**
@@ -54,9 +54,9 @@ class VehiculoController extends Controller {
 		 * @param  int  $id
 		 * @return Response
 		 */
-		public function edit($id)
+		public function edit($idFabricante, $idVehiculo)
 		{
-			return "editando fabricante->$id";
+			return "editando el vehiculos $idVehiculo del fabricante ->$idFabricante	";
 		}
 
 		/**
@@ -67,7 +67,7 @@ class VehiculoController extends Controller {
 		 */
 		public function update($id)
 		{
-			return "actualizando vehiculo->$id";
+			//
 		}
 
 		/**
@@ -78,7 +78,8 @@ class VehiculoController extends Controller {
 		 */
 		public function destroy($id)
 		{
-			return "eliminando vehiculo->$id";
+			//
 		}
+
 
 }
