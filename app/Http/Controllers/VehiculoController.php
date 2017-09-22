@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Vehiculo;
 
 class VehiculoController extends Controller {
-
-		private $controller = 'vehiculo';
-
+		public function __construct()
+		{
+			$this->middleware('auth.basic');
+		}
 		/**
 		 * Display a listing of the resource.
 		 *

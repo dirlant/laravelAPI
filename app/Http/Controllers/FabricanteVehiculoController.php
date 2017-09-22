@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Fabricante;
 
 class FabricanteVehiculoController extends Controller {
-		private $controller = 'fabricante / vehiculo';
+		public function __construct()
+		{
+			$this->middleware('auth.basic');
+		}
 		/**
 		 * Display a listing of the resource.
 		 *
@@ -20,7 +23,7 @@ class FabricanteVehiculoController extends Controller {
     	}))->find($id);
 
 			if(!$fabricante){
-				return response()->json(['data' => $fabricante, 'codigo' => 'Error 404'], 404);
+				return response()->json(['data' => $fabricante, 'codigo' => 'Error 404', 'controller' => 'FabricanteVehiculoController'], 404);
 			}
 			return response()->json(['data' => $fabricante], 200);
 		}

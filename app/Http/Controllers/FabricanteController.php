@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class FabricanteController extends Controller {
 
-	private $controller = 'fabricante';
+	public function __construct()
+	{
+		$this->middleware('auth.basic');
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -17,7 +20,7 @@ class FabricanteController extends Controller {
 	{
 		$fabricante = Fabricante::All();
 		if(!$fabricante){
-			return response()->json(['data' => $fabricante, 'codigo' => 'Error 404'], 404);
+			return response()->json(['data' => $fabricante, 'codigo' => 'Error 404', 'controller' => 'FabricanteController'], 404);
 		}
 		return response()->json(['data' => $fabricante], 200) ;
 	}
@@ -39,7 +42,7 @@ class FabricanteController extends Controller {
 	 */
 	public function store()
 	{
-
+		return response()->json(['data' => 'usted tiene permiso', 'codigo' => 200, 'controller' => 'FabricanteController'], 404);
 	}
 
 	/**
@@ -52,7 +55,7 @@ class FabricanteController extends Controller {
 	{
 		$fabricante = Fabricante::find($id);
 		if(!$fabricante){
-			return response()->json(['data' => $fabricante, 'codigo' => 'Error 404'], 404);
+			return response()->json(['data' => $fabricante, 'codigo' => 'Error 404','controller' => 'FabricanteController'], 404);
 		}
 		return response()->json(['data' => $fabricante], 200);
 	}
