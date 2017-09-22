@@ -24,7 +24,7 @@ class FabricanteController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return 'Mostrando el menu para crear un fabricante';
 	}
 
 	/**
@@ -34,7 +34,7 @@ class FabricanteController extends Controller {
 	 */
 	public function store()
 	{
-		return 'mostrando la lista de los fabricantes';
+		
 	}
 
 	/**
@@ -45,7 +45,7 @@ class FabricanteController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		return "mostrando fabricante->$id";
 	}
 
 	/**
@@ -56,7 +56,7 @@ class FabricanteController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		return "editando fabricante->$id";
 	}
 
 	/**
@@ -67,7 +67,7 @@ class FabricanteController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		return "actualizando fabricante->$id";
 	}
 
 	/**
@@ -78,7 +78,7 @@ class FabricanteController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		return "eliminando fabricante->$id";
 	}
 
 }

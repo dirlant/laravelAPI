@@ -12,9 +12,9 @@ class VehiculoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($id)
 	{
-		//
+		return "mostrando vehiculos del fabricante ->$id";
 	}
 
 	/**
@@ -22,9 +22,9 @@ class VehiculoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
-		//
+		return "creando vehiculos del fabricante ->$id";
 	}
 
 	/**
@@ -43,9 +43,9 @@ class VehiculoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($idFabricante, $idVehiculo)
 	{
-		//
+		return "mostrando vehiculos del fabricante ->$idFabricante  con del detalle del vehiculo $idVehiculo";
 	}
 
 	/**
@@ -54,9 +54,9 @@ class VehiculoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($idFabricante, $idVehiculo)
 	{
-		//
+		return "editando el vehiculos $idVehiculo del fabricante ->$idFabricante";		
 	}
 
 	/**
