@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class FabricanteController extends Controller {
 
+	private $controller = 'fabricante';
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,7 +15,11 @@ class FabricanteController extends Controller {
 	 */
 	public function index()
 	{
-		return response()->json(['data' => Fabricante::All()], 200) ;
+		$fabricante = Fabricante::All();
+		if(!$fabricante){
+			return response()->json(['data' => $fabricante, 'codigo' => 'Error 404'], 404);
+		}
+		return response()->json(['data' => $fabricante], 200) ;
 	}
 
 	/**
@@ -47,7 +52,7 @@ class FabricanteController extends Controller {
 	{
 		$fabricante = Fabricante::find($id);
 		if(!$fabricante){
-			return response()->json(['data' => 'No se encontro el fabricante', 'codigo' => 'Error 404'], 404);
+			return response()->json(['data' => $fabricante, 'codigo' => 'Error 404'], 404);
 		}
 		return response()->json(['data' => $fabricante], 200);
 	}

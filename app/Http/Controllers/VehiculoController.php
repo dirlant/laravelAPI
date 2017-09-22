@@ -2,10 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+use App\Vehiculo;
 
 class VehiculoController extends Controller {
+
+		private $controller = 'vehiculo';
 
 		/**
 		 * Display a listing of the resource.
@@ -14,7 +16,11 @@ class VehiculoController extends Controller {
 		 */
 		public function index()
 		{
-			return 'mostrando la lista de los vehiculo por API';
+			$vehiculo = Vehiculo::All();
+			if(!$vehiculo){
+				return response()->json(['data' => $vehiculo, 'codigo' => 'Error 404'], 404);
+			}
+			return response()->json(['data' => $vehiculo], 200) ;
 		}
 
 		/**
@@ -45,7 +51,11 @@ class VehiculoController extends Controller {
 		 */
 		public function show($id)
 		{
-			return "mostrando fabricante->$id";
+			$vehiculo = Vehiculo::find($id);
+			if(!$vehiculo){
+				return response()->json(['data' => $vehiculo, 'codigo' => 'Error 404'], 404);
+			}
+			return response()->json(['data' => $vehiculo], 200);
 		}
 
 		/**
