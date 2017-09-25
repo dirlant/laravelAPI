@@ -40,9 +40,17 @@ class FabricanteController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		return response()->json(['data' => 'usted tiene permiso', 'codigo' => 200, 'controller' => 'FabricanteController'], 404);
+		if (!$request){
+			return response()->json(['mensaje' => 'No se recibieron datos', 'codigo' => 'Error 500', 'controller' => 'FabricanteController'], 500);
+		}
+
+		Fabricante::create($request->all());
+		return response()->json([
+			'data' => 'El fabricante ha sido creado'
+		], 200) ;
+
 	}
 
 	/**

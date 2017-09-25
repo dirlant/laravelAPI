@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Fabricante;
+use App\Vehiculo;
 
 class FabricanteVehiculoController extends Controller {
 		public function __construct()
@@ -43,9 +44,32 @@ class FabricanteVehiculoController extends Controller {
 		 *
 		 * @return Response
 		 */
-		public function store()
+		 public function store(Request $request)
 		{
-			//
+			if (!$request->get('fabricante_id')){
+				return response()->json([
+					'mensaje' => 'No se recibio ningún fabricante',
+					'codigo' => 'N/A',
+					'controller' => 'FabricanteVehiculoController'
+				], 500);
+			}
+
+			$fabricante = Fabricante::find($request->get('fabricante_id'));
+			if(!$fabricante){
+				return response()->json([
+					'mensaje' => 'El fabricante no existe',
+					'codigo' => '404',
+					'controller' =>
+					'FabricanteVehiculoController'
+				], 404);
+			}
+
+			Vehiculo::create($request->all());
+			return response()->json([
+				'data' => 'El vehiculo ha sido creado',
+				'codigo' => '200',
+				'controller' => 'FabricanteVehiculoController'
+			], 200) ;
 		}
 
 		/**
