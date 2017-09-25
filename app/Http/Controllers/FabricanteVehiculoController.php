@@ -107,9 +107,46 @@ class FabricanteVehiculoController extends Controller {
 		 * @param  int  $id
 		 * @return Response
 		 */
-		public function update($id)
+		public function update(Request $req, $idFabricante, $idVehiculo)
 		{
-			//
+			$metodo = $req->method();
+
+			// Buscando fabricante
+			$fabricante = Fabricante::find($idFabricante);
+			if (!$fabricante) {
+				return response()->json([
+					'error' => 'No se encontraron resultados del fabricante',
+					'controller' => 'FabricanteController'
+				], 404);
+			}
+
+			// Buscando vehiculo del fabricante
+			$vehiculo = $fabricante->vehiculos()->find($idVehiculo);
+			if (!$vehiculo) {
+				return response()->json([
+					'error' => 'No se encontraron del vehiculo asociado',
+					'controller' => 'FabricanteController'
+				], 404);
+			}
+
+
+			if ($metodo === 'PATCH') {
+				if ($req->get('color') == ''){
+					return response()->json([
+						'error' => 'no se recibieron parametros',
+						'controller' => 'FabricanteController'
+					], 404);
+				}
+
+				$vehiculo->color = $req->get('color');
+				$vehiculo->save();
+
+				return response()->json([
+					'data'=> $vehiculo,
+					'status' => 'ok',
+					'controller' => 'FabricanteController'
+				], 404);
+			}
 		}
 
 		/**

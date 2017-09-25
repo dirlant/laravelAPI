@@ -40,9 +40,9 @@ class FabricanteController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(Request $req)
 	{
-		if (!$request){
+		if (!$req){
 			return response()->json([
 				'mensaje' => 'No se recibieron datos',
 				'codigo' => 'Error 500',
@@ -50,7 +50,7 @@ class FabricanteController extends Controller {
 			], 500);
 		}
 
-		Fabricante::create($request->all());
+		Fabricante::create($req->all());
 		return response()->json([
 			'data' => 'El fabricante ha sido creado'
 		], 200) ;
@@ -91,24 +91,20 @@ class FabricanteController extends Controller {
 	 */
 	public function update(Request $req, $id)
 	{
+
 		$metodo = $req->method();
 		$fabricante = Fabricante::find($id);
 
 		if ($metodo === 'PATCH') {
-			if ($req->get('nombre') == null || $req->get('nombre') == '') {
+			if ($req->get('nombre') == ''){
 				return response()->json([
-					'error' => 'no se recibio la variable',
+					'error' => 'no se recibieron parametros',
 					'controller' => 'FabricanteController'
 				], 404);
 			}
-			if ($req->get('telefono') == null || $req->get('telefono') == '') {
-				return response()->json([
-					'status' => 'error',
-					'controller' => 'FabricanteController'
-				], 404);
-			}
+
+
 			$fabricante->nombre = $req->get('nombre');
-			$fabricante->telefono = $req->get('telefono');
 			$fabricante->save();
 
 			return response()->json([
@@ -119,7 +115,7 @@ class FabricanteController extends Controller {
 		}
 
 		if ($metodo === 'PUT') {
-			if (!$req->get('nombre') && !$req->get('telefono')){
+			if (!$req->get('nombre') || !$req->get('telefono')){
 				return response()->json([
 					'error' => 'no se recibieron parametros',
 					'controller' => 'FabricanteController'
