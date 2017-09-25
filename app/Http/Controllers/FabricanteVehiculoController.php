@@ -44,9 +44,9 @@ class FabricanteVehiculoController extends Controller {
 		 *
 		 * @return Response
 		 */
-		 public function store(Request $request)
+		 public function store(Request $req, $id)
 		{
-			if (!$request->get('fabricante_id')){
+			if (!$req){
 				return response()->json([
 					'mensaje' => 'No se recibio ningún fabricante',
 					'codigo' => 'N/A',
@@ -54,7 +54,7 @@ class FabricanteVehiculoController extends Controller {
 				], 500);
 			}
 
-			$fabricante = Fabricante::find($request->get('fabricante_id'));
+			$fabricante = Fabricante::find($id);
 			if(!$fabricante){
 				return response()->json([
 					'mensaje' => 'El fabricante no existe',
@@ -64,7 +64,14 @@ class FabricanteVehiculoController extends Controller {
 				], 404);
 			}
 
-			Vehiculo::create($request->all());
+			Vehiculo::create([
+				'color' => $req->get('color'),
+				'cilindraje' => $req->get('cilindraje'),
+				'potencia' => $req->get('potencia'),
+				'peso' => $req->get('peso'),
+				'fabricante_id' => $id
+			]);
+
 			return response()->json([
 				'data' => 'El vehiculo ha sido creado',
 				'codigo' => '200',
